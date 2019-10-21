@@ -1,18 +1,18 @@
 # 一、预先准备环境
 ## 1. 准备服务器
-这里准备了三台ubuntu虚拟机，每台一核cpu和2G内存，配置好root账户，并安装好了docker，后续的所有操作都是使用root账户。虚拟机具体信息如下表：
+这里准备了三台ubuntu虚拟机，每台一核cpu和2G内存，配置好root账户，并安装好了docker，(kube-admin), 后续的所有操作都是使用kube-admin账户。虚拟机具体信息如下表：
 
 | 系统类型 | IP地址 | 节点角色 | CPU | Memory | Hostname |
 | :------: | :--------: | :-------: | :-----: | :---------: | :-----: |
-| ubuntu16.04 | 192.168.1.101 | worker |   1    | 2G | server01 |
-| ubuntu16.04 | 192.168.1.102 | master |   1    | 2G | server02 |
-| ubuntu16.04 | 192.168.1.103 | worker |   1    | 2G | server03 |
+| centos 7 | 192.168.1.101 | worker |   1    | 2G | floki-u01.kuber.vmserver |
+| centos 7 | 192.168.1.102 | master |   1    | 2G | floki-u02.kuber.vmserver |
+| centos 7 | 192.168.1.103 | worker |   1    | 2G | floki-u03.kuber.vmserver |
 
 > 使用centos的同学也可以参考此文档，需要注意替换系统命令即可
 
 ## 2. 安装docker（所有节点）
 一般情况使用下面的方法安装即可
-docker安装可参照[阿里云的文档](https://help.aliyun.com/document_detail/60742.html?spm=5176.11065259.1996646101.searchclickresult.261ebdd3Qy7wLJ)
+docker安装可参照[Install Docker and Docker Compose (Centos 7)](https://github.com/NaturalHistoryMuseum/scratchpads2/wiki/Install-Docker-and-Docker-Compose-(Centos-7))
 #### 2.1 卸载旧版本(如果有的话)
 ```bash
 $ apt-get remove docker docker-engine docker.io
