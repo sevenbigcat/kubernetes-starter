@@ -4,62 +4,37 @@
 
 | 系统类型 | IP地址 | 节点角色 | CPU | Memory | Hostname |
 | :------: | :--------: | :-------: | :-----: | :---------: | :-----: |
-| centos 7 | 192.168.1.101 | worker |   1    | 2G | floki-u01.kuber.vmserver |
-| centos 7 | 192.168.1.102 | master |   1    | 2G | floki-u02.kuber.vmserver |
-| centos 7 | 192.168.1.103 | worker |   1    | 2G | floki-u03.kuber.vmserver |
+| centos 7 | 192.168.242.135 | worker |   2    | 2G | kube-u01.kuber.vmserver |
+| centos 7 | 192.168.242.133 | master |   2    | 2G | kuber-u02.kuber.vmserver |
+| centos 7 | 192.168.242.134 | worker |   2    | 2G | kuber-u03.kuber.vmserver |
 
-> 使用centos的同学也可以参考此文档，需要注意替换系统命令即可
+```bash
+sudo yum update -y && sudo yum install -y vim 
+```
 
 ## 2. 安装docker（所有节点）
 一般情况使用下面的方法安装即可
 docker安装可参照[Install Docker and Docker Compose (Centos 7)](https://github.com/NaturalHistoryMuseum/scratchpads2/wiki/Install-Docker-and-Docker-Compose-(Centos-7))
-#### 2.1 卸载旧版本(如果有的话)
-```bash
-$ apt-get remove docker docker-engine docker.io
-```
-#### 2.2 更新apt-get源
-```bash
-$ add-apt-repository  "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-```
-```bash
-$ apt-get update
-```
-#### 2.3 安装apt的https支持包并添加gpg秘钥
-```bash
-$ apt-get install \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    software-properties-common
-$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
-```
 
-#### 2.4 安装docker-ce
+#### 2.1 Install needed packages:
+```bash
+# install dependencies
+sudo yum install -y yum-utils device-mapper-persistent-data lvm2
 
-- 安装最新的稳定版
-```bash
-$ apt-get install -y docker-ce
-```
-- 安装指定版本
-```bash
-#获取版本列表
-$ apt-cache madison docker-ce
- 
-#指定版本安装(比如版本是17.09.1~ce-0~ubuntu)
-$ apt-get install -y docker-ce=17.09.1~ce-0~ubuntu
+# add docker repo
+sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 
-```
-- 接受所有ip的数据包转发
-```bash
-$ vi /lib/systemd/system/docker.service
-   
-#找到ExecStart=xxx，在这行上面加入一行，内容如下：(k8s的网络需要)
-ExecStartPost=/sbin/iptables -I FORWARD -s 0.0.0.0/0 -j ACCEPT
-```
-- 启动服务
-```bash
-$ systemctl daemon-reload
-$ service docker restart
+# install docker-ce
+sudo yum -y install docker-ce
+
+# add user to docker group
+sudo usermod -aG docker $(whoami)
+
+# set docker start automaticall at boot time
+sudo systemctl enable docker.service
+
+# start service
+sudo systemctl start docker.service
 ```
   
 
