@@ -8,6 +8,14 @@
 | centos 7 | 192.168.242.133 | master |   2    | 2G | kuber-u02.kuber.vmserver |
 | centos 7 | 192.168.242.134 | worker |   2    | 2G | kuber-u03.kuber.vmserver |
 
+### [Create a Kubernetes cluster from the scratch (On CentOS 7 / RHEL 7) and Deploy an application on the cluster and Expose to Internet — Complete Example PART — 01](https://medium.com/@hashithkarunarathne/create-a-kubernetes-cluster-from-the-scratch-on-centos-7-rhel-7-and-deploy-an-application-on-85a92997b565)
+
+### [Create a Kubernetes cluster from the scratch (On CentOS 7 / RHEL 7) and Deploy an application on the cluster and Expose to Internet — Complete Example PART — 02 (Docker)](https://medium.com/@hashithkarunarathne/create-a-kubernetes-cluster-from-the-scratch-on-centos-7-rhel-7-and-deploy-an-application-on-db5ac06b7404)
+
+### [kubectl Cheat Sheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)
+
+### [Install Kubernetes Cluster with Docker CE on CentOS 7](https://ahmermansoor.blogspot.com/2019/04/install-kubernetes-cluster-docker-ce-centos-7.html)
+
 ```bash
 sudo yum update -y && sudo yum install -y vim 
 ```
